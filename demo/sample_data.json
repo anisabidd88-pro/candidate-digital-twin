@@ -1,0 +1,40 @@
+{
+  "candidates": [
+    {
+      "id": "c1",
+      "name": "Amina Ben Amor",
+      "resume_text": "Experienced sales professional with 5 years in B2B SaaS. Skills: communication, negotiation, CRM, data analysis, leadership.",
+      "skills": [
+        "communication",
+        "negotiation",
+        "CRM",
+        "data analysis",
+        "leadership"
+      ],
+      "psychometric_score": 78,
+      "interview_score": 85,
+      "projects": [
+        "Led onboarding of 30 enterprise accounts",
+        "Improved renewal rate by 12%"
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Sami Trabelsi",
+      "resume_text": "Digital marketer and content creator. Skills: SEO, content creation, social media, analytics, communication.",
+      "skills": [
+        "SEO",
+        "content creation",
+        "social media",
+        "analytics",
+        "communication"
+      ],
+      "psychometric_score": 72,
+      "interview_score": 80,
+      "projects": [
+        "Grew blog traffic 4x in 9 months",
+        "Managed social campaigns for 10+ brands"
+      ]
+    }
+  ]
+}

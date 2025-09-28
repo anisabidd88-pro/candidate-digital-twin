@@ -1,0 +1,8 @@
+# Optional / advanced dependencies (not required for the demo)
+flask
+scikit-learn
+pandas
+networkx
+torch
+torch-geometric
+spacy

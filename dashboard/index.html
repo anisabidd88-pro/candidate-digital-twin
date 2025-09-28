@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Candidate Digital Twin — Demo Dashboard</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 24px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    tr:hover { background: #f9f9f9; }
+    .score { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Candidate Digital Twin — Demo</h1>
+  <p>Select a role to see predicted scores for candidates.</p>
+  <select id="roleSelect"></select>
+  <table id="resultTable">
+    <thead><tr><th>Candidate</th><th>Role</th><th>Score</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <script>
+    fetch('results.json').then(r=>r.json()).then(data=>{
+      const results = data.results;
+      const roles = Array.from(new Map(results.map(x=>[x.role_id, x.role_name])).values());
+      // Build role dropdown (unique)
+      const roleMap = {};
+      results.forEach(r=> roleMap[r.role_id] = r.role_name);
+      const select = document.getElementById('roleSelect');
+      Object.keys(roleMap).forEach(rid=>{
+        const opt = document.createElement('option');
+        opt.value = rid;
+        opt.textContent = roleMap[rid];
+        select.appendChild(opt);
+      });
+      function render(roleId){
+        const tbody = document.querySelector('#resultTable tbody');
+        tbody.innerHTML = '';
+        results.filter(r=> r.role_id === roleId).forEach(r=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${r.candidate_name}</td><td>${r.role_name}</td><td class='score'>${r.score}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+      select.addEventListener('change', e=> render(e.target.value));
+      // initial render
+      if (select.options.length) {
+        select.selectedIndex = 0;
+        render(select.value);
+      }
+    }).catch(err=>{
+      document.body.innerHTML = '<h2>Error loading results.json</h2><pre>'+err+'</pre>';
+    });
+  </script>
+</body>
+</html>
